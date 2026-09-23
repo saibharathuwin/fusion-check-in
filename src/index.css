@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@keyframes planning-item-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reflections-entry-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes add-student-check-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Scanner viewfinder: a light sweeps top-to-bottom while it's actively looking for a code —
+   the familiar "live scanning" cue, purely decorative (doesn't affect the real decode loop). */
+@keyframes scan-sweep {
+  0% {
+    transform: translateY(-2%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(102%);
+    opacity: 0;
+  }
+}
+
+/* A slow breathing glow on the viewfinder border/corners, so the scan screen reads as "alive"
+   even in the everyday case where nothing else on screen is moving. */
+@keyframes scan-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Result card entrance — replaces an instant appear/disappear with a quick, springy pop, matching
+   add-student-check-pop's easing so success moments feel consistent across the app. */
+@keyframes result-pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Shared entrance for login-page elements (logo, card, footer) — staggered via animation-delay on
+   each element so the page feels assembled rather than dumped on screen all at once. */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
