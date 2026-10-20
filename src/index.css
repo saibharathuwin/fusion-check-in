@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+:root {
+  --fusion-green: #0d9488;
+  --fusion-green-strong: #0f766e;
+  --fusion-green-soft: #0d9488;
+  --fusion-text-on-green: #ffffff;
+}
+
+html {
+  color-scheme: light;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*::selection {
+  background: var(--fusion-green-soft);
+  color: var(--fusion-text-on-green);
+}
+
+*::-moz-selection {
+  background: var(--fusion-green-soft);
+  color: var(--fusion-text-on-green);
+}
+
+input::selection,
+textarea::selection,
+select::selection,
+[contenteditable='true']::selection,
+[contenteditable='']::selection {
+  background: var(--fusion-green);
+  color: var(--fusion-text-on-green);
+}
+
+input,
+textarea,
+select,
+[contenteditable='true'],
+[contenteditable=''] {
+  -webkit-user-select: text;
+  user-select: text;
+  caret-color: var(--fusion-green);
+}
+
+/* Deliberately does NOT include [role='button'] — rowActivationProps() (src/lib/rowActivation.ts)
+   puts role="button" on ordinary table rows/cards throughout the app (Events, Student Directory,
+   Attendee lists) so they're keyboard-activatable. user-select: none cascades to all descendants,
+   so including it here silently made every name/ID/email/program cell inside those rows
+   unselectable — exactly the "selection works in some places but not others" bug this fixes.
+   Real icon-only controls (<button>, bare svg/img/canvas) are unaffected by this change. */
+button,
+svg,
+img,
+canvas {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+button:focus-visible,
+a:focus-visible,
+[role='button']:focus-visible {
+  outline: 2px solid var(--fusion-green);
+  outline-offset: 2px;
+}
+
+@keyframes planning-item-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reflections-entry-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes add-student-check-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Result card entrance — replaces an instant appear/disappear with a quick, springy pop, matching
+   add-student-check-pop's easing so success moments feel consistent across the app. */
+@keyframes result-pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Kiosk result card's auto-dismiss countdown bar — shrinks from full width to nothing over the
+   same RESULT_AUTO_DISMISS_MS the card itself waits before clearing, so the wait feels visible
+   and intentional instead of the card just vanishing out of nowhere. */
+@keyframes result-countdown {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+/* Shared entrance for login-page elements (logo, card, footer) — staggered via animation-delay on
+   each element so the page feels assembled rather than dumped on screen all at once. */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* The nav bar's active-item underline scales in from the center rather than just appearing —
+   a small detail that reads as more deliberate when switching between routes. */
+@keyframes underline-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
